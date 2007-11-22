@@ -1,0 +1,7 @@
+{% autoescape off %} 
+<div class="form-row checkbox-row {% if field.errors %}errors{% endif %}" >
+{% if field.errors %}{{ field.errors }}{% endif %}
+{{ field }}<label for="{{ field.auto_id }}" class="vCheckboxLabel {% if field.field.required %}required{% endif %}">{{ field.label }}</label> 
+{% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+</div>
+{% endautoescape %} 
