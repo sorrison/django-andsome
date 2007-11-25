@@ -3,7 +3,9 @@ from django.newforms.widgets import flatatt
 from django.newforms.util import smart_unicode
 from django.utils.html import escape
 from django.utils.simplejson import *
-        
+from django.utils.safestring import mark_safe   
+
+
 class TinyMCE(Textarea):
     """
     TinyMCE widget. requires you include tiny_mce_src.js in your template
@@ -31,5 +33,5 @@ class TinyMCE(Textarea):
         self.mce_settings['elements'] = "id_%s" % name
         mce_json = JSONEncoder().encode(self.mce_settings)
         
-        return u'<textarea%s>%s</textarea> <script type="text/javascript">\
-                tinyMCE.init(%s)</script>' % (flatatt(final_attrs), escape(value), mce_json)
+        return mark_safe(u'<textarea%s>%s</textarea> <script type="text/javascript">\
+                tinyMCE.init(%s)</script>' % (flatatt(final_attrs), escape(value), mce_json))
