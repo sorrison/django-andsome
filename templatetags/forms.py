@@ -17,3 +17,7 @@ def checkbox_formfield(field):
 @register.inclusion_tag('form_as_div.html')
 def form_as_div(form):
     return {'form': form, }
+
+@register.inclusion_tag('search_form.html')
+def search_form(url, terms):
+    return { 'url': url, 'terms': terms }

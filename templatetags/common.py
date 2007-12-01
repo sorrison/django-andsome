@@ -69,4 +69,3 @@ def yes_no_img(boolean, reversed=False):
     else:
         return """<img src="%simg/admin/icon-no.gif" alt="Not Active"/>""" % settings.MEDIA_URL
 
-#yes_no_img.mark_safe = True
