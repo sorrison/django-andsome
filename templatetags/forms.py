@@ -1,4 +1,5 @@
 from django.template import Library
+from django.conf import settings
 
 register = Library()
 
@@ -19,5 +20,5 @@ def form_as_div(form):
     return {'form': form, }
 
 @register.inclusion_tag('search_form.html')
-def search_form(url, terms):
-    return { 'url': url, 'terms': terms }
+def search_form(url='', terms=''):
+    return { 'url': url, 'terms': terms, 'MEDIA_URL': settings.MEDIA_URL }
