@@ -1,5 +1,7 @@
 from django.template import Library
 from django.conf import settings
+from django import template
+from django.template import resolve_variable
 
 register = Library()
 
@@ -22,3 +24,39 @@ def form_as_div(form):
 @register.inclusion_tag('search_form.html')
 def search_form(url='', terms=''):
     return { 'url': url, 'terms': terms, 'MEDIA_URL': settings.MEDIA_URL }
+
+@register.tag
+def newformfield(parser, token):
+    try:
+        tag_name, field = token.split_contents()
+    except:
+        raise template.TemplateSyntaxError, "%r tag requires exactly one argument" % token.contents.split()[0]
+    return FormFieldNode(field)
+
+class FormFieldNode(template.Node):
+    def __init__(self, field):
+        self.field = template.Variable(field)
+
+    def get_template(self, class_name):
+        try:
+            template_name = 'formfield/%s.html' % class_name
+            return template.loader.get_template(template_name)
+        except template.TemplateDoesNotExist:
+            return template.loader.get_template('formfield/default.html')
+
+    def render(self, context):
+        try:
+            field = self.field.resolve(context)
+        except template.VariableDoesNotExist:
+            return ''
+
+        context.push()
+        context['formfield'] = field
+        output = self.get_template(field.field.__class__.__name__.lower()).render(context)
+        context.pop()
+        return output
+        
+
+        
+        
+            
