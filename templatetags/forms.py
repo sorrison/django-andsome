@@ -5,9 +5,6 @@ from django.template import resolve_variable
 
 register = Library()
 
-@register.inclusion_tag('formfield.html')
-def formfield(field):
-    return {'field': field, }
 
 @register.inclusion_tag('inlineformfield.html')
 def inlineformfield(field1, field2, field3=False):
@@ -25,8 +22,9 @@ def form_as_div(form):
 def search_form(url='', terms=''):
     return { 'url': url, 'terms': terms, 'MEDIA_URL': settings.MEDIA_URL }
 
+
 @register.tag
-def newformfield(parser, token):
+def formfield(parser, token):
     try:
         tag_name, field = token.split_contents()
     except:
@@ -52,7 +50,7 @@ class FormFieldNode(template.Node):
 
         context.push()
         context['formfield'] = field
-        output = self.get_template(field.field.__class__.__name__.lower()).render(context)
+        output = self.get_template(field.field.widget.__class__.__name__.lower()).render(context)
         context.pop()
         return output
         
