@@ -1,3 +1,2 @@
-{% for field in form %}
-{% include "formfield.html" %}
-{% endfor %}
+{% load forms %}
+{% for field in form %}{% formfield field %}{% endfor %}

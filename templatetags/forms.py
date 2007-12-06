@@ -31,6 +31,7 @@ def formfield(parser, token):
         raise template.TemplateSyntaxError, "%r tag requires exactly one argument" % token.contents.split()[0]
     return FormFieldNode(field)
 
+
 class FormFieldNode(template.Node):
     def __init__(self, field):
         self.field = template.Variable(field)
