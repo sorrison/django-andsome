@@ -49,9 +49,17 @@ class FormFieldNode(template.Node):
         except template.VariableDoesNotExist:
             return ''
 
+        class_names = []
+        if field.field.required:
+            class_names.append('required')
+
+        class_str = class_names and u' class="%s"' % u' '.join(class_names) or u''
+
         context.push()
+        context['class'] = class_str
         context['formfield'] = field
         output = self.get_template(field.field.widget.__class__.__name__.lower()).render(context)
+        context.pop()
         context.pop()
         return output
         
