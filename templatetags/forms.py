@@ -49,12 +49,19 @@ class FormFieldNode(template.Node):
         except template.VariableDoesNotExist:
             return ''
 
-        class_names = []
+        label_class_names = []
         if field.field.required:
-            class_names.append('required')
+            label_class_names.append('required')
 
-        class_str = class_names and u' class="%s"' % u' '.join(class_names) or u''
+        widget_class_name = field.field.widget.__class__.__name__.lower()
+        field_class_name = field.field.__class__.__name__.lower()
+        if widget_class_name == 'checkboxinput':
+            label_class_names.append('vCheckboxLabel')
+        
 
+        class_str = label_class_names and u' class="%s"' % u' '.join(label_class_names) or u''
+
+        context.push()
         context.push()
         context['class'] = class_str
         context['formfield'] = field
