@@ -39,3 +39,12 @@ def log_and_message(obj, flag):
         message=_('The %(name)s "%(obj)s" was deleted successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
 
     user.message_set.create(message=message)
+
+
+def unique(seq):
+    """Makes a list unique"""
+    # Not order preserving
+    keys = {}
+    for e in seq:
+        keys[e] = 1
+    return keys.keys()
