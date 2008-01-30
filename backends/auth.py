@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ImproperlyConfigured
 import ldap
 import ldap.filter
 
 
-class LDAPBackend:
+class LDAPBackend(ModelBackend):
     def authenticate(self, username=None, password=None):
         
         try:
@@ -67,9 +68,3 @@ class LDAPBackend:
             # User set inactive
             return None
             
-
-    def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            return None
