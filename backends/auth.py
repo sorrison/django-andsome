@@ -12,8 +12,9 @@ class LDAPBackend(ModelBackend):
         try:
             test = settings.LDAP_HOST
             test = settings.LDAP_PORT
+            test = settings.LDAP_BASE
         except:
-            raise ImproperlyConfigured("LDAP_HOST and/or LDAP_PORT not specified in settings.py")
+            raise ImproperlyConfigured("LDAP_HOST, LDAP_PORT and LDAP_BASE must be specified in settings.py")
         
         scope = ldap.SCOPE_SUBTREE
         filter = ldap.filter.filter_format("(&(objectclass=person) (uid=%s))", [username])
