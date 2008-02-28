@@ -9,5 +9,5 @@ class SiteLogin:
             if request.POST:
                 return login(request)
             else:
-                return HttpResponseRedirect('%s?next=%s' % (settings.LOGIN_URL,request.path))
+                return HttpResponseRedirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
 
