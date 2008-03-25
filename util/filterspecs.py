@@ -53,6 +53,8 @@ class FilterBar(object):
             if self.request.GET.has_key(f.name):
                 qs[f.name] = self.request.GET[f.name]
 
+        #if self.request.GET.has_key('p'):
+        #    qs['p'] = self.request.GET['p']
         self.qs = qs
 
 
@@ -67,3 +69,19 @@ class FilterBar(object):
 
     def __str__(self):
         return mark_safe(self.output())
+
+
+
+
+class ObjectList(object):
+
+
+    def __init__(self, request, object_list, headers, filters):
+
+        self.headers = headers
+        self.object_list = object_list
+        
+        
+        
+        
+        

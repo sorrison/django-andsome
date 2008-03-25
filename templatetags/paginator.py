@@ -1,30 +1,38 @@
 from django import template
+from django.utils.safestring import mark_safe
+from django_common.util.filterspecs import get_query_string
 
 register = template.Library()
 
-def paginator(context, adjacent_pages=2):
-    """
-    To be used in conjunction with the object_list generic view.
+DOT = '.'
 
-    Adds pagination context variables for use in displaying first, adjacent and
-    last page links in addition to those created by the object_list generic
-    view.
-    """
-    page_numbers = [n for n in \
-                    range(context["page"] - adjacent_pages, context["page"] + adjacent_pages + 1) \
-                    if n > 0 and n <= context["pages"]]
+def paginator_number(page, i, qs):
+
+    qs['p'] = i
+    
+    if i == DOT:
+        return u'... '
+    elif i == page.number:
+        return mark_safe(u'<span class="this-page">%d</span> ' % (i))
+    else:
+        return mark_safe(u'<a href="%s"%s>%d</a> ' % ((get_query_string(qs)), (i == page.paginator.num_pages and ' class="end"' or ''), i))
+paginator_number = register.simple_tag(paginator_number)
+
+def pagination(page, request):
+    
+    tqs = request.META['QUERY_STRING']
+    qs = {}
+    tqs = tqs.split('&')
+    for q in tqs:
+        k, v = q.split('=')
+        qs[k] = v
+    pagination_required = False
+    if page.paginator.num_pages > 1:
+        pagination_required = True
+
     return {
-        "hits": context["hits"],
-        "results_per_page": context["results_per_page"],
-        "page": context["page"],
-        "pages": context["pages"],
-        "page_numbers": page_numbers,
-        "next": context["next"],
-        "previous": context["previous"],
-        "has_next": context["has_next"],
-        "has_previous": context["has_previous"],
-        "show_first": 1 not in page_numbers,
-        "show_last": context["pages"] not in page_numbers,
+        'page': page,
+        'pagination_required': pagination_required,
+        'qs': qs,
     }
-
-register.inclusion_tag("paginator.html", takes_context=True)(paginator)
+pagination = register.inclusion_tag('pagination.html')(pagination)
