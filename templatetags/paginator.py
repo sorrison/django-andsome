@@ -22,10 +22,13 @@ def pagination(page, request):
     
     tqs = request.META['QUERY_STRING']
     qs = {}
-    tqs = tqs.split('&')
-    for q in tqs:
-        k, v = q.split('=')
-        qs[k] = v
+    try:
+        tqs = tqs.split('&')
+        for q in tqs:
+            k, v = q.split('=')
+            qs[k] = v
+    except:
+        pass
     pagination_required = False
     if page.paginator.num_pages > 1:
         pagination_required = True
