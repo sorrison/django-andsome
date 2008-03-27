@@ -1,5 +1,5 @@
 from django.utils.safestring import mark_safe
-
+from django.db.models.query import QuerySet
 
 def get_query_string(qs):
     return '?' + '&amp;'.join([u'%s=%s' % (k, v) for k, v in qs.items()]).replace(' ', '%20')
@@ -8,6 +8,13 @@ def get_query_string(qs):
 class Filter(object):
 
     def __init__(self, request, name, filters):
+        
+        if isinstance(filters, QuerySet):
+            f = {}
+            for i in filters:
+                f[i.pk] = str(i)
+            filters = f
+            
         self.name = name
         self.filters = filters
         self.selected = None
