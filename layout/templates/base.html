@@ -10,7 +10,7 @@
 {% block extrahead %}{% endblock %}
 </head>
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block bodyextra %}{% endblock %} >
 
 <!-- Container -->
 <div id="container">
