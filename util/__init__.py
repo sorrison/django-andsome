@@ -5,38 +5,30 @@ from django.utils.encoding import force_unicode
 from django_common.middleware.threadlocals import get_current_user
 
 
-def log_and_message(obj, flag):
+def log_and_message(obj, flag, custom_message=None):
 
     user = get_current_user()
     opts = obj.__class__._meta
 
-    if flag == ADDITION:
-        LogEntry.objects.log_action(
-            user.id,
-            ContentType.objects.get_for_model(obj.__class__).id,
-            obj._get_pk_val(),
-            force_unicode(obj),
-            ADDITION
+    if not custom_message:
+
+        if flag == ADDITION:
+            message = _('The %(name)s "%(obj)s" was added successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
+        elif flag == CHANGE:
+            message = _('The %(name)s "%(obj)s" was changed successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
+        elif flag == DELETION:
+            message=_('The %(name)s "%(obj)s" was deleted successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
+
+    else:
+        message = custom_message
+
+    LogEntry.objects.log_action(
+        user.id,
+        ContentType.objects.get_for_model(obj.__class__).id,
+        obj._get_pk_val(),
+        force_unicode(obj),
+        flag
         )
-        message = _('The %(name)s "%(obj)s" was added successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
-    elif flag == CHANGE:
-        LogEntry.objects.log_action(
-            user.id,
-            ContentType.objects.get_for_model(obj.__class__).id,
-            obj._get_pk_val(),
-            force_unicode(obj),
-            CHANGE
-        )
-        message = _('The %(name)s "%(obj)s" was changed successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
-    elif flag == DELETION:
-        LogEntry.objects.log_action(
-            user.id,
-            ContentType.objects.get_for_model(obj.__class__).id,
-            obj._get_pk_val(),
-            force_unicode(obj),
-            DELETION
-        )
-        message=_('The %(name)s "%(obj)s" was deleted successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
 
     user.message_set.create(message=message)
 
