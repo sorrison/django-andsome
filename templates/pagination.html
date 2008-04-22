@@ -1,9 +1,9 @@
 {% load paginator %}
 <p class="paginator">
-{% if pagination_required %}
-{% for i in page.paginator.page_range %}
-    {% paginator_number page i qs %}
-{% endfor %}
-{% endif %}
-{{ page.paginator.count }} object{{ page.paginator.count|pluralize }}
+  {% if pagination_required %}
+    {% for i in page.paginator.page_range %}
+      {% paginator_number page i qs %}
+    {% endfor %}
+  {% endif %}
+  {{ page.paginator.count }} {{ object_name }}
 </p>

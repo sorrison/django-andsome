@@ -1,5 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
+from django.core.paginator import QuerySetPaginator
 from django_common.util.filterspecs import get_query_string
 
 register = template.Library()
@@ -32,10 +33,23 @@ def pagination(page, request):
     pagination_required = False
     if page.paginator.num_pages > 1:
         pagination_required = True
+        
+    if page.paginator.count == 1:
+        object_name = 'object'
+    else:
+        object_name = 'objects'
+
+    if isinstance(page.paginator, QuerySetPaginator):
+        if page.paginator.count == 1:
+            object_name = page.paginator.object_list.model._meta.verbose_name
+        else:
+            object_name = page.paginator.object_list.model._meta.verbose_name_plural
+            
 
     return {
         'page': page,
         'pagination_required': pagination_required,
+        'object_name': object_name,
         'qs': qs,
     }
 pagination = register.inclusion_tag('pagination.html')(pagination)

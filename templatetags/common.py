@@ -1,8 +1,8 @@
-from django.template import Library
+from django import template
 from django.conf import settings
 import datetime
 
-register = Library()
+register = template.Library()
 
 @register.simple_tag
 def active(request, pattern):
@@ -10,7 +10,6 @@ def active(request, pattern):
     if re.search('^/%s%s' % (settings.BASE_URL, pattern), request.path):
         return 'active'
     return ''
-
 
 
 @register.simple_tag
@@ -69,3 +68,45 @@ def yes_no_img(boolean, reversed=False):
     else:
         return """<img src="%simg/admin/icon-no.gif" alt="Not Active"/>""" % settings.MEDIA_URL
 
+
+
+
+
+@register.tag
+def gen_table(parser, token):
+    try:
+        tag_name, queryset, template_name = token.split_contents()
+    except:
+        try:
+            tag_name, queryset = token.split_contents()
+            template_name = None
+        except:
+            raise template.TemplateSyntaxError, "%r tag requires one or two arguments" % token.contents.split()[0]
+    return QuerySetTableNode(queryset, template_name)
+
+
+class QuerySetTableNode(template.Node):
+    def __init__(self, queryset, template_name):
+        self.queryset = template.Variable(queryset)
+        self.template_name = template_name
+        
+    def render(self, context):
+        try:
+            queryset = self.queryset.resolve(context)
+        except template.VariableDoesNotExist:
+            return ''
+        
+        if not self.template_name:
+            app_label = queryset.model._meta.app_label
+            model_name = queryset.model._meta.verbose_name
+            template_name = '%s/%s_table.html' % (app_label, model_name.lower().replace(' ', ''))
+        else:
+            template_name  = self.template_name
+        template_obj = template.loader.get_template(template_name)
+
+        context.push()
+        context['object_list'] = queryset
+        output = template_obj.render(context)
+        context.pop()
+        return output
+                                                         
