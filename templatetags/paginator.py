@@ -9,7 +9,7 @@ DOT = '.'
 
 def paginator_number(page, i, qs):
 
-    qs['p'] = i
+    qs['page'] = i
     
     if i == DOT:
         return u'... '
