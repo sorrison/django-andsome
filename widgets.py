@@ -40,7 +40,7 @@ class TinyMCE(Textarea):
 
 
 
-class RadioInput(StrAndUnicode):
+class InlineRadioInput(StrAndUnicode):
     """
     An object used by RadioFieldRenderer that represents a single
     <input type='radio'>.
@@ -81,11 +81,11 @@ class InlineRadioFieldRenderer(StrAndUnicode):
 
     def __iter__(self):
         for i, choice in enumerate(self.choices):
-            yield RadioInput(self.name, self.value, self.attrs.copy(), choice, i)
+            yield InlineRadioInput(self.name, self.value, self.attrs.copy(), choice, i)
 
     def __getitem__(self, idx):
         choice = self.choices[idx] # Let the IndexError propogate
-        return RadioInput(self.name, self.value, self.attrs.copy(), choice, idx)
+        return InlineRadioInput(self.name, self.value, self.attrs.copy(), choice, idx)
 
     def __unicode__(self):
         return self.render()
@@ -94,3 +94,58 @@ class InlineRadioFieldRenderer(StrAndUnicode):
         """Outputs a <ul> for this set of radio fields."""
         return mark_safe(u'<ul class="radiolist inline">\n%s\n</ul>' % u'\n'.join([u'<li>%s</li>'
                 % force_unicode(w) for w in self]))
+
+
+class TableRadioInput(StrAndUnicode):
+    """
+    An object used by RadioFieldRenderer that represents a single
+    <input type='radio'>.
+    """
+
+    def __init__(self, name, value, attrs, choice, index):
+        self.name, self.value = name, value
+        self.attrs = attrs
+        self.choice_value = force_unicode(choice[0])
+        self.choice_label = force_unicode(choice[1])
+        self.index = index
+
+    def __unicode__(self):
+        return mark_safe(u'%s' % (self.tag()))
+
+    def is_checked(self):
+        return self.value == self.choice_value
+
+    def tag(self):
+        if 'id' in self.attrs:
+            self.attrs['id'] = '%s_%s' % (self.attrs['id'], self.index)
+        final_attrs = dict(self.attrs, type='radio', name=self.name, value=self.choice_value)
+        if self.is_checked():
+            final_attrs['checked'] = 'checked'
+        return mark_safe(u'<input%s />' % flatatt(final_attrs))
+
+
+
+class TableRadioFieldRenderer(StrAndUnicode):
+    """
+    An object used by RadioSelect to enable customization of radio widgets.
+    """
+
+    def __init__(self, name, value, attrs, choices):
+        self.name, self.value, self.attrs = name, value, attrs
+        self.choices = choices
+
+    def __iter__(self):
+        for i, choice in enumerate(self.choices):
+            yield TableRadioInput(self.name, self.value, self.attrs.copy(), choice, i)
+
+    def __getitem__(self, idx):
+        choice = self.choices[idx] # Let the IndexError propogate
+        return TableRadioInput(self.name, self.value, self.attrs.copy(), choice, idx)
+
+    def __unicode__(self):
+        return self.render()
+
+    def render(self):
+        """Outputs a <ul> for this set of radio fields."""
+        return mark_safe(u'<tr><td>%s<td>%s\n</tr>' % (self.name, u'\n'.join([u'<td>%s</td>'
+                % force_unicode(w) for w in self])))
