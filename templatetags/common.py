@@ -70,8 +70,31 @@ def yes_no_img(boolean, reversed=False):
 
 
 
+@register.tag
+def searchform(parser, token):
+    print token.split_contents()
+    try:
+        tag_name, post_url = token.split_contents()
+    except:
+        try:
+            tag_name = token.split_contents()
+            post_url = '.'
+        except:
+            raise template.TemplateSyntaxError, "%r tag requires one or no arguments" % token.contents.split()[0]
+    return SearchFormNode(post_url)
 
-
+class SearchFormNode(template.Node):
+    def __init__(self, post_url):
+        self.post_url = post_url
+        
+    def render(self, context):
+        template_obj = template.loader.get_template('search_form.html')
+        context.push()
+        context['post_url'] = self.post_url
+        output = template_obj.render(context)
+        context.pop()
+        return output
+                                                                                                                                                            
 @register.tag
 def gen_table(parser, token):
     try:
@@ -86,6 +109,7 @@ def gen_table(parser, token):
 
 
 class QuerySetTableNode(template.Node):
+
     def __init__(self, queryset, template_name):
         self.queryset = template.Variable(queryset)
         self.template_name = template_name
