@@ -1,5 +1,6 @@
 from django.newforms import *
 #from django.newforms.widgets import RadioInput
+from django.newforms.widgets import Input
 from django.newforms.util import smart_unicode
 from django.utils.html import escape, conditional_escape
 from django.utils.simplejson import *
@@ -149,3 +150,16 @@ class TableRadioFieldRenderer(StrAndUnicode):
         """Outputs a <ul> for this set of radio fields."""
         return mark_safe(u'<tr><td>%s<td>%s\n</tr>' % (self.name, u'\n'.join([u'<td>%s</td>'
                 % force_unicode(w) for w in self])))
+
+
+
+class CaptchaInput(Input):
+    input_type = 'text'
+
+    def __init__(self, attrs=None, render_value=False):
+        super(CaptchaInput, self).__init__(attrs)
+        self.render_value = render_value
+     
+    def render(self, name, value, attrs=None):
+        if not self.render_value: value=None
+        return super(CaptchaInput, self).render(name, value, attrs)
