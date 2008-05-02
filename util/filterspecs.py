@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.db.models.query import QuerySet
+from operator import itemgetter
 
 def get_query_string(qs):
     return '?' + '&amp;'.join([u'%s=%s' % (k, v) for k, v in qs.items()]).replace(' ', '%20')
@@ -32,11 +33,14 @@ class Filter(object):
         output = ''
         output += '<h3>By %s</h3>\n' % self.name
         output += '<ul>\n'
+
+        filters = sorted(self.filters.iteritems(), key=itemgetter(1))
+
         if self.selected is not None:
             output += """<li><a href="%s">All</a></li>\n""" % get_query_string(qs)
         else:
             output += """<li class="selected"><a href="%s">All</a></li>\n""" % get_query_string(qs)
-        for k, v in self.filters.items():
+        for k, v in filters:
             if str(self.selected) == str(k):
                 style = """class="selected" """
             else:
