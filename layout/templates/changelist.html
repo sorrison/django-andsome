@@ -1,5 +1,7 @@
 {% extends "base_site.html" %}
 
+{% load paginator %}
+
 {% block stylesheet %}changelists{% endblock %}
 
 {% block bodyclass %}change-list{% endblock %}
@@ -7,3 +9,15 @@
 {% block coltype %}flex{% endblock %}
 
 {% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="module filtered" id="changelist">
+{% searchform %}
+		<div id="changelist-filter">
+   				<h2>Filter</h2> 					
+					{{ filter_bar|safe }}	
+   	</div>
+   	{% gen_table page.object_list %}
+   	{% pagination page request %}
+</div>
+{% endblock %}
