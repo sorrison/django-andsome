@@ -15,8 +15,8 @@
 <label for="{{ field3.auto_id }}" class="{% if field3.field.required %}required{% endif %} inline">{{ field3.label }}:</label> {{ field3 }}
 {#{% if field3.field.required %}<span class="redtext"> *</span>{% endif %}#}
 {% endif %}
-{% if field.help_text %}<p class="help">{{ field1.help_text }}</p>{% endif %}
-{% if field.help_text %}<p class="help">{{ field2.help_text }}</p>{% endif %}
+{% if field1.help_text %}<p class="help">{{ field1.help_text }}</p>{% endif %}
+{% if field2.help_text %}<p class="help">{{ field2.help_text }}</p>{% endif %}
 {% if field3 %}
 {% if field.help_text %}<p class="help">{{ field3.help_text }}</p>{% endif %}
 {% endif %}
