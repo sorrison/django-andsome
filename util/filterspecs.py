@@ -9,7 +9,12 @@ def get_query_string(qs):
 class Filter(object):
     multi = False
 
-    def __init__(self, request, name, filters):
+    def __init__(self, request, name, filters, header=''):
+
+        if header == '':
+            self.header = name
+        else:
+            self.header = header
 
         if isinstance(filters, QuerySet):
             f = {}
@@ -32,7 +37,7 @@ class Filter(object):
             pass
 
         output = ''
-        output += '<h3>By %s</h3>\n' % self.name
+        output += '<h3>By %s</h3>\n' % self.header.replace('_', ' ')
         output += '<ul>\n'
                     
         filters = sorted(self.filters.iteritems(), key=itemgetter(1))
@@ -98,7 +103,7 @@ class DateFilter(object):
         choices = self.choices()
 
         output = ''
-        output += '<h3>By %s</h3>\n' % self.header
+        output += '<h3>By %s</h3>\n' % self.header.replace('_', ' ')
         output += '<ul>\n'
                     
 
