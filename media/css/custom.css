@@ -14,6 +14,12 @@ td.alt { color: silver; }
 td.right { text-align:right; }
 td.middle { vertical-align:middle }
 
+#timesheet .weekend { background-color: silver; }
+#timesheet .today { background-color: #FF9933; }
+#timesheet .holiday { background-color: green; }
+#timesheet td { padding-left: 0px; padding-right: 0px; text-align: center; }
+#timesheet input {  margin: 0px; }
+
 ul.biglist { padding: 10px; }
 .biglist li { font-size: 18px; padding: 10px; list-style-type:none; }
 
@@ -37,6 +43,7 @@ div.form-row li { list-style-type:none; }
 
 .red { color: red; }
 .green { color: green; }
+.hidden { display: none; }
 
 a:link.active, a:visited.active { color: #666; text-decoration:none; }
 
