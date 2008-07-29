@@ -6,6 +6,8 @@
 .float-right { float:right; }
 .float-left { float:left; }
 
+.small { font-size: 14px !important; }
+
 .deletelink { padding-left:12px; background:url(../img/admin/icon_deletelink.gif) 0 .25em no-repeat; }
 a.deletelink:link, a.deletelink:visited { color:#CC3434; }
 a.deletelink:hover { color:#993333; }
