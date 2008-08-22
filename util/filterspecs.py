@@ -16,6 +16,9 @@ class Filter(object):
         else:
             self.header = header
 
+        if isinstance(filters, tuple):
+            filters = dict(filters)
+
         if isinstance(filters, QuerySet):
             f = {}
             for i in filters:
