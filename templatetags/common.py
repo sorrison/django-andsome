@@ -7,7 +7,7 @@ register = template.Library()
 @register.simple_tag
 def active(request, pattern):
     import re
-    if re.search('^/%s%s' % (request.META['SCRIPT_NAME'], pattern), request.path):
+    if re.search('^%s/%s' % (request.META['SCRIPT_NAME'], pattern), request.path):
         return 'active'
     return ''
 
