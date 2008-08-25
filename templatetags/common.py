@@ -72,7 +72,6 @@ def yes_no_img(boolean, reversed=False):
 
 @register.tag
 def searchform(parser, token):
-    print token.split_contents()
     try:
         tag_name, post_url = token.split_contents()
     except:
