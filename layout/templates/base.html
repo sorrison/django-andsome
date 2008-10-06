@@ -27,10 +27,10 @@
         <div id="user-tools">
         {% if user.is_authenticated %}
         Welcome, <strong>{{ user.first_name }}</strong> 
-        {#/ <a href="/{{ base_url }}accounts/logout/">Log out</a>#}
+        / <a href="{% url logout %}">Log out</a>
 			{% else %}
 			Welcome, <strong>Guest</strong> / 
-        <a href="/{{ base_url }}accounts/login/">Log In</a>
+        <a href="{% url login %}">Log In</a>
 			{% endif %}
         </div>
         {% endif %}
