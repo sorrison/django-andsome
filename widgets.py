@@ -1,13 +1,26 @@
-from django.forms import *
+
 #from django.newforms.widgets import RadioInput
-from django.forms.widgets import Input
-from django.forms.util import smart_unicode
+try:
+    from django.forms.widgets import Input
+    from django.forms import *
+except:
+    from django.newforms.widgets import Input
+    from django.newforms import *
+try:
+    from django.forms.util import smart_unicode
+except:
+    from django.newforms.util import smart_unicode
+
 from django.utils.html import escape, conditional_escape
 from django.utils.simplejson import *
 from django.utils.safestring import mark_safe   
 from django.utils.encoding import StrAndUnicode, force_unicode
 from django.utils.safestring import mark_safe
-from django.forms.util import flatatt
+
+try:
+    from django.forms.util import flatatt
+except:
+    from django.newforms.util import flatatt
 
 class TinyMCE(Textarea):
     """
