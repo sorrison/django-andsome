@@ -67,3 +67,5 @@ a:link.active, a:visited.active { color: #666; text-decoration:none; }
 .graph_key_purple { background-color: purple; }
 .graph_key_grey { background-color: grey; }
 .graph_key_pink { background-color: pink; }
+
+.barwidth { padding-left: 0px; padding-right: 0px; margin: 0px; width: 100px; background-color: white; }
