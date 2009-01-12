@@ -65,3 +65,6 @@ h2.alert { background-color: #ffc; border-bottom:1px solid #ddd; border-right:1p
 .graph_key_pink { background-color: pink; }
 
 .border { border: thin solid black; padding: 10px; }
+
+.yeslink { padding-left:12px; background:url(../img/admin/icon-yes.gif) 0 .2em no-repeat; }
+.nolink { padding-left:12px; background:url(../img/admin/icon-no.gif) 0 .2em no-repeat; }
