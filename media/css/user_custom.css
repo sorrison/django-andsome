@@ -68,3 +68,5 @@ h2.alert { background-color: #ffc; border-bottom:1px solid #ddd; border-right:1p
 
 .yeslink { padding-left:12px; background:url(../img/admin/icon-yes.gif) 0 .2em no-repeat; }
 .nolink { padding-left:12px; background:url(../img/admin/icon-no.gif) 0 .2em no-repeat; }
+
+.barwidth { padding-left: 0px; padding-right: 0px; margin: 0px; width: 100px; background-color: white; }
