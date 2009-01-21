@@ -176,3 +176,11 @@ class CaptchaInput(Input):
     def render(self, name, value, attrs=None):
         if not self.render_value: value=None
         return super(CaptchaInput, self).render(name, value, attrs)
+
+
+#class WideTextarea(TextArea):
+#    def __init__(self, attrs=None):
+
+class TextField(CharField):
+    widget = forms.Textarea(attrs={'cols': '85'})
+    
