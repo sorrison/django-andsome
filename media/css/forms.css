@@ -58,3 +58,4 @@ fieldset.monospace textarea { font-family:"Bitstream Vera Sans Mono",Monaco,"Cou
 .vLargeTextField, .vXMLLargeTextField { width:48em; }
 .flatpages-flatpage #id_content { height:40.2em; }
 .module table .vPositiveSmallIntegerField { width:2.2em; }
+.vTextField { width:20em; }
