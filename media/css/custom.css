@@ -12,7 +12,8 @@
 
 td.alt { color: silver; }
 td.right { text-align:right; }
-td.middle { vertical-align:middle }
+.middle { vertical-align:middle }
+
 
 #timesheet .weekend { background-color: silver !important; }
 #timesheet .today { background-color: #FF9933 !important; }
