@@ -47,7 +47,7 @@ class GraphGenerator(base.GraphGenerator):
         chart.set_line_style(0, thickness=3)
         chart.set_colours([line_colour])
         chart.add_fill_simple(fill_colour)
-        return chart.get_url()
+        return chart
 
 
     def bar_chart(self, data_dict, x_labels, max_y):
@@ -72,7 +72,7 @@ class GraphGenerator(base.GraphGenerator):
         return chart.get_url()
 
 
-    def pie_chart(self, data_dict):
+    def pie_chart(self, data_dict, title=None):
         
         chart = PieChart2D(500, 225)
     
@@ -82,8 +82,10 @@ class GraphGenerator(base.GraphGenerator):
             chart_labels.append(str(label))
             chart_data.append(value)
 
+        if title:
+            chart.title = title
 
         chart.add_data(chart_data)
         chart.set_pie_labels(chart_labels)
         chart.set_colours(colours[:len(data_dict)])
-        return chart.get_url()
+        return chart
