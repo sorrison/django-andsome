@@ -79,8 +79,9 @@ class GraphGenerator(base.GraphGenerator):
         chart_data = []
         chart_labels = []
         for label, value in data_dict.items():
-            chart_labels.append(str(label))
-            chart_data.append(value)
+            if value > 0:
+                chart_labels.append(str(label))
+                chart_data.append(value)
 
         if title:
             chart.title = title
