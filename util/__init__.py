@@ -27,7 +27,8 @@ def log_and_message(obj, flag, custom_message=None):
         ContentType.objects.get_for_model(obj.__class__).id,
         obj._get_pk_val(),
         force_unicode(obj),
-        flag
+        flag,
+        change_message=message,
         )
 
     user.message_set.create(message=message)
