@@ -66,13 +66,13 @@ if len(sys.argv) > 1 and sys.argv[1] == 'bdist_wininst':
         file_info[0] = '\\PURELIB\\%s' % file_info[0]
 
 # Dynamically calculate the version based on andsome.VERSION.
-#version = __import__('placard').get_version()
+version = __import__('andsome').get_version()
 #if u'dev' in version:
 #    version = ' '.join(version.split(' ')[:-1])
 
 setup(
     name = "django-andsome",
-    version = "1.0.1",
+    version = version,
     url = 'http://code.arcs.org.au/gitorious/django/django-andsome/',
     author = 'Sam Morrison',
     author_email = 'sam@vpac.org',

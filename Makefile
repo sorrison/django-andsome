@@ -2,8 +2,7 @@ PYTHON=`which python`
 DESTDIR=/
 BUILDIR=$(CURDIR)/build/debian/django-andsome
 PROJECT=django-andsome
-#VERSION=$(python -c "from placard import get_version; print get_version()")
-VERSION=1.0.1
+VERSION=$(python -c "from andsome import get_version; print get_version()")
 
 all:
 		@echo "make source - Create source package"
