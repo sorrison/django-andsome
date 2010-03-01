@@ -1,0 +1,11 @@
+django-andsome (1.0.1) testing; urgency=low
+
+  * Added GPLv3, removed media files
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 01 Mar 2010 16:18:06 +1100
+
+django-andsome (1.0) testing; urgency=low
+
+  * Initial release.
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 01 Mar 2010 13:32:00 +1100
