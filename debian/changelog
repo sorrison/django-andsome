@@ -1,3 +1,9 @@
+django-andsome (1.0.3) stable; urgency=low
+
+  * Added junit xmlrunner, removed old references to library
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 01 Mar 2010 17:44:19 +1100
+
 django-andsome (1.0.2) stable; urgency=low
 
   * Moved to stable. No changes to code
