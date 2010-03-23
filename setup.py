@@ -48,9 +48,9 @@ packages, data_files = [], []
 root_dir = os.path.dirname(__file__)
 if root_dir != '':
     os.chdir(root_dir)
-andsome_dir = 'andsome'
+code_dir = 'andsome'
 
-for dirpath, dirnames, filenames in os.walk(andsome_dir):
+for dirpath, dirnames, filenames in os.walk(code_dir):
     # Ignore dirnames that start with '.'
     for i, dirname in enumerate(dirnames):
         if dirname.startswith('.'): del dirnames[i]
@@ -65,10 +65,8 @@ if len(sys.argv) > 1 and sys.argv[1] == 'bdist_wininst':
     for file_info in data_files:
         file_info[0] = '\\PURELIB\\%s' % file_info[0]
 
-# Dynamically calculate the version based on andsome.VERSION.
-version = __import__('andsome').get_version()
-#if u'dev' in version:
-#    version = ' '.join(version.split(' ')[:-1])
+# Dynamically calculate the version based on code_dir.VERSION.
+version = __import__(code_dir).get_version()
 
 setup(
     name = "django-andsome",
