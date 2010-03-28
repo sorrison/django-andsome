@@ -20,6 +20,9 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 from django.utils.encoding import force_unicode
+
+import datetime
+
 from andsome.middleware.threadlocals import get_current_user
 
 
@@ -59,3 +62,31 @@ def unique(seq):
     for e in seq:
         keys[e] = 1
     return keys.keys()
+
+
+
+def get_date_range(request, default_start=(datetime.date.today()-datetime.timedelta(days=90)), default_end=datetime.date.today()):
+
+    today = datetime.date.today()
+
+    if request.REQUEST.has_key('start'):
+        try:
+            years, months, days = request.GET['start'].split('-')
+            start = datetime.datetime(int(years), int(months), int(days))
+            start = start.date()
+        except:
+            start = today - datetime.timedelta(days=90)
+    else:
+        start = default_start
+
+    if request.REQUEST.has_key('end'):
+        try:
+            years, months, days = request.GET['end'].split('-')
+            end = datetime.datetime(int(years), int(months), int(days))
+            end = end.date()
+        except:
+            end = today
+    else:
+        end = default_end
+
+    return start, end

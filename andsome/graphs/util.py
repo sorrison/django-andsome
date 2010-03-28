@@ -25,7 +25,6 @@ from decimal import Decimal
 
 
 def smooth_data(rows, start, end):
-    
     today = datetime.date.today()
     data = []
     colours = []
@@ -50,7 +49,7 @@ def smooth_data(rows, start, end):
                 data.append(total)
                 colours.append(0x9AB8D7)
             start = start + datetime.timedelta(days=15)
-    elif period >= 3000:
+    elif period >= 100:
         while start <= end:
             start_e = start
             if start != today:
