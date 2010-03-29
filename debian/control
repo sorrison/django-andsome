@@ -8,6 +8,6 @@ Standards-Version: 3.8.3.0
 Package: django-andsome
 Architecture: all
 Homepage: http://code.arcs.org.au/gitorious/django/django-andsome/
-Depends: ${misc:Depends}, ${python:Depends}, python-django (>= 0.96)
+Depends: ${misc:Depends}, ${python:Depends}, python-django (>= 0.96), python-pygooglechart (>= 0.2)
 Description: Extra bits for Django.
  Extra bits for Django.
