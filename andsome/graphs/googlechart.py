@@ -68,6 +68,25 @@ class GraphGenerator(base.GraphGenerator):
         return chart
 
 
+    def line_chart(self, data, title='', x_labels=None, y_label='', x_label='', line_colour='4D89F9', fill_colour=None):
+        if not data:
+            return None
+        chart = SimpleLineChart(840, 200)
+        chart.add_data(data)
+        chart.set_title(title)
+        chart.set_axis_range('y', min(data), max(data))
+        chart.set_axis_labels('y', ['',y_label,''])
+        if x_labels:
+            chart.set_axis_labels('x', x_labels)
+        chart.set_axis_labels('x', ['', x_label, ''])
+        chart.set_line_style(0, thickness=3)
+
+        chart.set_colours([line_colour])
+        if fill_colour:
+            chart.add_fill_simple(fill_colour)
+        return chart
+
+
     def bar_chart(self, data_dict, x_labels, max_y):
 
         chart = GroupedVerticalBarChart(840, 200)

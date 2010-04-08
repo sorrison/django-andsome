@@ -27,6 +27,9 @@ grapher = module.GraphGenerator()
 def gen_sparkline():
     return grapher.sparkline()
 
+def line_chart(*args, **kwargs):
+    return grapher.line_chart(*args, **kwargs)
+
 def bar_chart(data, labels, x_labels, max_y):
     return grapher.bar_chart(data, labels, x_labels, max_y)
 
