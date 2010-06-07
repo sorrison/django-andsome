@@ -2,9 +2,9 @@
 <div class="form-row" {% if field1.errors or field2.errors or field3.errors %}"errors"{% endif %}>
 {% if field1.errors or field2.errors or field3.errors %}
 <ul class="errorlist">
-{% if field1.errors %}<li>{{ field1.errors|first }}</li>{% endif %}
-{% if field2.errors %}<li>{{ field2.errors|first }}</li>{% endif %}
-{% if field3.errors %}<li>{{ field3.errors|first }}</li>{% endif %}
+{% if field1.errors %}<li>{{ field1.label }}: {{ field1.errors|first }}</li>{% endif %}
+{% if field2.errors %}<li>{{ field2.label }}: {{ field2.errors|first }}</li>{% endif %}
+{% if field3.errors %}<li>{{ field3.label }}: {{ field3.errors|first }}</li>{% endif %}
 </ul>
 {% endif %}
 <label for="{{ field1.auto_id }}" class="{% if field1.field.required %}required{% endif %}">{{ field1.label }}:</label> {{ field1 }}
