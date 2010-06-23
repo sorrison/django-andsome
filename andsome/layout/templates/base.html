@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-au" xml:lang="en-au">
 <head>
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/{% block stylesheet %}base{% endblock %}.css"/>
+{% load adminmedia %}
 {% block extrastyle %}{% endblock %}
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <title>{% block title %}{% endblock %}&nbsp;|&nbsp;{% block site_name_title %}{% endblock %}</title>
 <meta name="author" content="{% block author %}Sam Morrison{% endblock %}"/>
 {% block favicon %}{% endblock %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% admin_media_prefix %}{% endfilter %}";</script>
 {% block site_extrahead %}{% endblock %}
 {% block extrahead %}{% endblock %}
 </head>
