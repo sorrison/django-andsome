@@ -151,3 +151,10 @@ class QuerySetTableNode(template.Node):
         context.pop()
         return output
                                                          
+from django import VERSION as v
+if v[0]>1 or (v[0]==1 and v[1]>1):
+    pass
+else:
+    @register.simple_tag
+    def csrf_token():
+        return ""
