@@ -20,5 +20,5 @@ from django.conf import settings
 
 def base_url(request):
     ctx = {}
-    ctx['base_url'] = '%s/' % request.META.get('SCRIPT_NAME', '')
+    ctx['base_url'] = '%s' % request.META.get('SCRIPT_NAME', '')
     return ctx
