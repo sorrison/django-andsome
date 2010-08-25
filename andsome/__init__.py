@@ -16,7 +16,7 @@
 # along with django-andsome  If not, see <http://www.gnu.org/licenses/>.
 
 
-VERSION = (1, 1, 4, 'final', 0)
+VERSION = (1, 1, 5, 'final', 0)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])

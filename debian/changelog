@@ -1,3 +1,9 @@
+django-andsome (1.1.5-1) testing; urgency=low
+
+  * base_url bug fix
+
+ -- Sam Morrison <sam@vpac.org>  Wed, 25 Aug 2010 15:20:44 +1000
+
 django-andsome (1.1.4-1) testing; urgency=low
 
   * Show message tags for new messages framework
