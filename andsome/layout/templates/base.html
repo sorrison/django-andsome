@@ -41,7 +41,7 @@
     </div>
     <!-- END Header -->
     
-    <div class="breadcrumbs">{% block breadcrumbs %}<a href="{{ base_url }}/">Home</a>{% block bread_crumbs_1 %}{% endblock %}{% endblock %}</div>
+    <div class="breadcrumbs">{% block breadcrumbs %}<a href="{{ base_url|default:"/" }}">Home</a>{% block bread_crumbs_1 %}{% endblock %}{% endblock %}</div>
     
 	{% block messagelist %}
 	{% if messages %}
