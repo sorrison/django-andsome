@@ -1,3 +1,9 @@
+django-andsome (1.1.6-2) stable; urgency=low
+
+  * Fix dependency issue
+
+ -- Sam Morrison <sam@vpac.org>  Fri, 10 Dec 2010 14:10:41 +1100
+
 django-andsome (1.1.6-1) stable; urgency=low
 
   * Added is_password_strong method
