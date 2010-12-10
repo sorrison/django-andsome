@@ -8,6 +8,6 @@ Standards-Version: 3.9.1
 Package: django-andsome
 Architecture: all
 Homepage: http://code.arcs.org.au/gitorious/django/django-andsome/
-Depends: ${misc:Depends}, ${python:Depends}, python-django (>= 1.2.1), python-pygooglechart (>= 0.2)
+Depends: ${misc:Depends}, ${python:Depends}, python-django (>= 1.2.1), python-pygooglechart (>= 0.2), python-cracklib (>= 2.8)
 Description: Extra bits for Django
  Contains several apps and extra helper methods for Django.
