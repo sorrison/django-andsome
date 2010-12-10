@@ -1,3 +1,9 @@
+django-andsome (1.1.6-1) stable; urgency=low
+
+  * Added is_password_strong method
+
+ -- Sam Morrison <sam@vpac.org>  Fri, 10 Dec 2010 14:02:41 +1100
+
 django-andsome (1.1.5-1) testing; urgency=low
 
   * base_url bug fix
