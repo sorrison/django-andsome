@@ -1,3 +1,9 @@
+django-andsome (1.1.7-1) stable; urgency=low
+
+  * Removed unused items
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 21 Feb 2011 13:25:49 +1100
+
 django-andsome (1.1.6-2) stable; urgency=low
 
   * Fix dependency issue
