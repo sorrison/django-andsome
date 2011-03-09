@@ -1,5 +1,7 @@
 {% extends "base_site.html" %}
+{% load	forms %}
 
+{% block title %}Login{% endblock %}
 {% block stylesheet %}base{% endblock %}
 {% block bodyclass %}login{% endblock %}
 
@@ -17,15 +19,19 @@
 {% endif %}
 
 <form method="post" action=".">{% csrf_token %}
-<table>
-<tr><td><label for="id_username">Username:</label></td><td>{{ form.username }}</td></tr>
-<tr><td><label for="id_password">Password:</label></td><td>{{ form.password }}</td></tr>
-</table>
-
-<input type="submit" value="login" />
-{% if next %}
-<input type="hidden" name="next" value="{{ next }}" />
-{% endif %}
+  {% formfield form.username %}
+  {% formfield form.password %}
+  {% if next %}
+  <div>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </div>
+  {% endif %}
+  <div class="submit-row">
+    <input type="submit" value="login" />
+  </div>
 </form>
+<script type="text/javascript">
+  document.getElementById('id_username').focus()
+</script>
 
 {% endblock %}
