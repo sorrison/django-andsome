@@ -1,4 +1,15 @@
 {% extends "base_site.html" %}
+
+{% block stylesheet %}base{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/login.css"/>
+{% endblock %}
+
+{% block usertools %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
 {% block content %}
 
 {% if form.errors %}
