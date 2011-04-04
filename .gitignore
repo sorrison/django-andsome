@@ -1,5 +1,2 @@
-build
 HEADER
-MANIFEST
-dist/
 *.pyc
