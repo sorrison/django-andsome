@@ -1,3 +1,9 @@
+django-andsome (1.1.10-1) stable; urgency=low
+
+  * Added generic email form
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 30 May 2011 10:34:19 +1000
+
 django-andsome (1.1.9-1) stable; urgency=low
 
   * More login template changes
