@@ -1,7 +1,7 @@
 {% load paginator %}
 <p class="paginator">
   {% if pagination_required %}
-    {% for i in page.paginator.page_range %}
+    {% for i in page_list %}
       {% paginator_number page i qs %}
     {% endfor %}
   {% endif %}
