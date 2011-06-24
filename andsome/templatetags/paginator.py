@@ -72,7 +72,6 @@ def pagination(page, request, eitherside=10):
 
         # If there are 10 or fewer pages, display links to every page.
         # Otherwise, do some fancy
-        print page.paginator.num_pages
         if page.paginator.num_pages <= 10:
             page_range = range(1, page.paginator.num_pages + 1)
         else:
@@ -81,29 +80,18 @@ def pagination(page, request, eitherside=10):
             # ON_EACH_SIDE links at either end of the "current page" link.
             page_range = []
             page_num = page.number
-            print page_num
             if page_num > (ON_EACH_SIDE + ON_ENDS +1):
-                print "A"
                 page_range.extend(range(1, ON_EACH_SIDE))
-                print page_range
                 page_range.append(DOT)
                 page_range.extend(range(page_num - ON_EACH_SIDE, page_num + 1))
-                print page_range
             else:
                 page_range.extend(range(1, page_num + 1))
-                print "B"
-                print page_range
             if page_num < (page.paginator.num_pages - ON_EACH_SIDE - ON_ENDS):
-                print "C"
                 page_range.extend(range(page_num + 1, page_num + ON_EACH_SIDE + 1))
-                print page_range
                 page_range.append(DOT)
                 page_range.extend(range(page.paginator.num_pages - ON_ENDS + 1, page.paginator.num_pages + 1))
-                print page_range
             else:
                 page_range.extend(range(page_num + 1, page.paginator.num_pages + 1))
-                print "D"
-                print page_range
 
     return {
         'page': page,
