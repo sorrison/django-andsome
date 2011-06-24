@@ -1,3 +1,9 @@
+django-andsome (1.1.12-1) stable; urgency=low
+
+  * Fixed some broken logic in new paginator
+
+ -- Sam Morrison <sam@vpac.org>  Fri, 24 Jun 2011 11:13:15 +1000
+
 django-andsome (1.1.11-1) stable; urgency=low
 
   * Better pagination
