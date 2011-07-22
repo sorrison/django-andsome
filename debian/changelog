@@ -1,3 +1,10 @@
+django-andsome (1.1.13-1) stable; urgency=low
+
+  * Handle ValuesQuerySets in filter bar
+  * Remove debugging print statements
+
+ -- Sam Morrison <sam@vpac.org>  Fri, 22 Jul 2011 10:57:50 +1000
+
 django-andsome (1.1.12-1) stable; urgency=low
 
   * Fixed some broken logic in new paginator
