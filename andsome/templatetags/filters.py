@@ -54,7 +54,7 @@ def timeformat(value):
 
 @register.filter
 def fileformat(kilobytes):
-
-    return filesizeformat(kilobytes*1024)
-
+    if kilobytes:
+        return filesizeformat(kilobytes*1024)
+    return None
 
