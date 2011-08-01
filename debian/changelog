@@ -1,3 +1,11 @@
+django-andsome (1.1.14-1) stable; urgency=low
+
+  * Use commas when displaying count of results
+  * Handle None values in filesizeformat filter
+  * Improvments to filters WRT querystrings
+
+ -- Sam Morrison <sam@vpac.org>  Mon, 01 Aug 2011 13:09:01 +1000
+
 django-andsome (1.1.13-1) stable; urgency=low
 
   * Handle ValuesQuerySets in filter bar
