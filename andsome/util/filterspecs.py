@@ -66,7 +66,6 @@ class Filter(object):
         output = ''
         output += '<h3>By %s</h3>\n' % self.header.replace('_', ' ')
         output += '<ul>\n'
-                    
         filters = sorted(self.filters.iteritems(), key=itemgetter(1))
 
         if self.selected is not None:
@@ -154,7 +153,14 @@ class FilterBar(object):
 
         self.request = request
         self.filter_list = filter_list
+        raw_qs = request.META.get('QUERY_STRING', '')
         qs = {}
+        for i in raw_qs.replace('?', '').split('&'):
+            if i:
+                k, v = i.split('=')
+                if k != 'page':
+                    qs[k] = v
+
         for f in self.filter_list:
             if f.multi:
                 params = dict(request.GET.items())
@@ -167,9 +173,6 @@ class FilterBar(object):
                 if self.request.GET.has_key(f.name):
                     qs[f.name] = self.request.GET[f.name]
 
-
-        #if self.request.GET.has_key('p'):
-        #    qs['p'] = self.request.GET['p']
         self.qs = qs
 
 
