@@ -155,11 +155,12 @@ class FilterBar(object):
         self.filter_list = filter_list
         raw_qs = request.META.get('QUERY_STRING', '')
         qs = {}
-        for i in raw_qs.replace('?', '').split('&'):
-            if i:
-                k, v = i.split('=')
-                if k != 'page':
-                    qs[k] = v
+        if raw_qs:
+            for i in raw_qs.replace('?', '').split('&'):
+                if i:
+                    k, v = i.split('=')
+                    if k != 'page':
+                        qs[k] = v
 
         for f in self.filter_list:
             if f.multi:
