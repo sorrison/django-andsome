@@ -1,3 +1,9 @@
+django-andsome (1.1.15-1) stable; urgency=high
+
+  * Fixed bug in filters if not filters defined
+
+ -- Sam Morrison <sam@vpac.org>  Wed, 03 Aug 2011 11:47:52 +1000
+
 django-andsome (1.1.14-1) stable; urgency=low
 
   * Use commas when displaying count of results
