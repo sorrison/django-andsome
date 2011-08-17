@@ -68,45 +68,65 @@ class GraphGenerator(base.GraphGenerator):
         return chart
 
 
-    def line_chart(self, data, title='', x_labels=None, y_label='', x_label='', line_colour='4D89F9', fill_colour=None):
-        if not data:
+    def line_chart(self, data_dict, title='', x_labels=None, y_label='', x_label=''):
+        if not data_dict:
             return None
+        
         chart = SimpleLineChart(840, 200)
-        chart.add_data(data)
+        labels = []
+        min_y = None
+        max_y = None
+        for label, data in data_dict.items():
+            chart.add_data(data)
+            labels.append(label)
+            if min_y is None or min(data) < min_y:
+                min_y = min(data)
+            if max_y is None or max(data) > max_y:
+                max_y = max(data)
+            print data
+                
+        if len(labels) > 1:
+            chart.set_legend(labels)
+
         chart.set_title(title)
-        chart.set_axis_range('y', min(data), max(data))
+        chart.set_axis_range('y', min_y, max_y)
         chart.set_axis_labels('y', ['',y_label,''])
         if x_labels:
             chart.set_axis_labels('x', x_labels)
         chart.set_axis_labels('x', ['', x_label, ''])
-        chart.set_line_style(0, thickness=3)
-
-        chart.set_colours([line_colour])
-        if fill_colour:
-            chart.add_fill_simple(fill_colour)
+        #chart.set_grid(10, 20)
+        for c, i in enumerate(data_dict):
+            chart.set_line_style(c, thickness=2)
+        
+        chart.set_colours(colours[:len(data)])
+        
         return chart
 
 
-    def bar_chart(self, data_dict, x_labels, max_y):
+    def bar_chart(self, data_dict, x_labels, max_y=None, bar_width=None):
 
-        chart = GroupedVerticalBarChart(840, 200)
+        chart = GroupedVerticalBarChart(840, 300)
         labels = []
-
+        max_y = None
         for label, data in data_dict.items():
             chart.add_data(data)
             labels.append(label)
-            
-        bar_width = 35 / len(data)
-        chart.set_bar_width(bar_width)   
+            if max_y is None or max(data) > max_y:
+                max_y = max(data)
+
+        if not bar_width:
+            bar_width = 35 / len(data)
+        chart.set_bar_width(bar_width)
         
-        chart.set_legend(labels)
+        if len(labels) > 1:
+            chart.set_legend(labels)
         
         chart.set_axis_range('y', 0, float(max_y))
         chart.set_axis_labels('x', [''])
         chart.set_axis_labels('x', x_labels)
         
         chart.set_colours(colours[:len(data)])
-        return chart.get_url()
+        return chart
 
 
     def pie_chart(self, data_dict, title=None):

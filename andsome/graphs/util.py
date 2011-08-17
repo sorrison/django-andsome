@@ -45,7 +45,7 @@ def smooth_data(rows, start, end):
                     total = total + (add or 0)
                     start_e= start_e  + datetime.timedelta(days=1)
 
-                total = total / 3600  
+                total = total /15
                 data.append(total)
                 colours.append(0x9AB8D7)
             start = start + datetime.timedelta(days=15)
@@ -64,7 +64,7 @@ def smooth_data(rows, start, end):
                     total = total + add
                     start_e= start_e  + datetime.timedelta(days=1)
 
-                total = total / 3600
+                total = total / 5
                 total = float(total)
                 data.append(total)
                 colours.append(0x9AB8D7)
@@ -76,7 +76,7 @@ def smooth_data(rows, start, end):
                     total = int(rows[start])
                 except:
                     total = 0
-                total = total# / 3600  
+                total = total  
                 data.append(total)
                 colours.append(0x9AB8D7)
             start = start + datetime.timedelta(days=1)
