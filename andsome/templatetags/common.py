@@ -19,6 +19,7 @@
 from django import template
 from django.conf import settings
 import datetime
+from decimal import Decimal
 
 register = template.Library()
 
@@ -30,6 +31,7 @@ def active(request, pattern):
     return ''
 
 
+    
 @register.simple_tag
 def date_filter(start, end):
     
@@ -150,7 +152,19 @@ class QuerySetTableNode(template.Node):
         output = template_obj.render(context)
         context.pop()
         return output
-                                                         
+
+@register.simple_tag
+def divide(a, b):
+    TWOPLACES = Decimal(10) ** -2
+    try:
+        return (Decimal(a) / Decimal(b) * 100).quantize(TWOPLACES)
+    except:
+        return ''
+
+
+    
+
+        
 from django import VERSION as v
 if v[0]>1 or (v[0]==1 and v[1]>1):
     pass
@@ -158,3 +172,6 @@ else:
     @register.simple_tag
     def csrf_token():
         return ""
+
+
+        
