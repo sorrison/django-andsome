@@ -83,7 +83,6 @@ class GraphGenerator(base.GraphGenerator):
                 min_y = min(data)
             if max_y is None or max(data) > max_y:
                 max_y = max(data)
-            print data
                 
         if len(labels) > 1:
             chart.set_legend(labels)
@@ -94,7 +93,7 @@ class GraphGenerator(base.GraphGenerator):
         if x_labels:
             chart.set_axis_labels('x', x_labels)
         chart.set_axis_labels('x', ['', x_label, ''])
-        #chart.set_grid(10, 20)
+        
         for c, i in enumerate(data_dict):
             chart.set_line_style(c, thickness=2)
         
@@ -109,10 +108,11 @@ class GraphGenerator(base.GraphGenerator):
         labels = []
         max_y = None
         for label, data in data_dict.items():
-            chart.add_data(data)
-            labels.append(label)
-            if max_y is None or max(data) > max_y:
-                max_y = max(data)
+            if data:
+                chart.add_data(data)
+                labels.append(label)
+                if max_y is None or max(data) > max_y:
+                    max_y = max(data)
 
         if not bar_width:
             bar_width = 35 / len(data)
@@ -120,8 +120,8 @@ class GraphGenerator(base.GraphGenerator):
         
         if len(labels) > 1:
             chart.set_legend(labels)
-        
-        chart.set_axis_range('y', 0, float(max_y))
+        if max_y:
+            chart.set_axis_range('y', 0, float(max_y))
         chart.set_axis_labels('x', [''])
         chart.set_axis_labels('x', x_labels)
         
