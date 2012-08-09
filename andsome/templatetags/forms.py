@@ -38,7 +38,7 @@ def form_as_div(form):
 
 @register.inclusion_tag('search_form.html')
 def search_form(url='', terms=''):
-    return { 'url': url, 'terms': terms, 'MEDIA_URL': settings.MEDIA_URL }
+    return { 'url': url, 'terms': terms, 'STATIC_URL': settings.STATIC_URL }
 
 
 @register.tag
