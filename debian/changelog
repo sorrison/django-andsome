@@ -1,3 +1,9 @@
+django-andsome (1.2-1) stable; urgency=low
+
+  * Support new Django static urls
+
+ -- Sam Morrison <sam@vpac.org>  Thu, 09 Aug 2012 11:29:07 +1000
+
 django-andsome (1.1.17-1) stable; urgency=low
 
   * Handle graphs with no data
